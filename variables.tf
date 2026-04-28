@@ -41,6 +41,10 @@ variable "key_name" {
 variable "my_ip" {
   description = "SSH接続を許可するIPアドレス"
   type        = string
+  validation {
+    condition     = can(cidrhost("${var.my_ip}/32", 0))
+    error_message = "my_ipは正しいIPv4アドレス形式で入力してください"
+  }
 }
 
 variable "db_name" {
@@ -78,7 +82,7 @@ variable "alert_email" {
 }
 
 variable "waf_block_threshold" {
-  description = "WAFのレートリミットのしきい値（5分間のリクエスト)"
+  description = "WAFのレートリミットの閾値（5分間のリクエスト)"
   type        = number
   default     = 2000 # 5分間で2000リクエストを超えたらブロック
 }
