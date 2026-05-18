@@ -38,7 +38,7 @@ resource "aws_lb_target_group_attachment" "main" {
 
 resource "aws_lb_target_group_attachment" "sub" {
   target_group_arn = aws_lb_target_group.main.arn
-  target_id        = aws_instance.sub.id  
+  target_id        = aws_instance.sub.id
   port             = 80
 }
 
