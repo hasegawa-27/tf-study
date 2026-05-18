@@ -1,3 +1,7 @@
+variables {
+  subnet_cidr_1c = "10.0.4.0/24"
+}
+
 run "VPCのテスト" {
   command = apply
 
