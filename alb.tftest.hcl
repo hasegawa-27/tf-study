@@ -67,3 +67,28 @@ run "ALBリスナーのテスト" {
     error_message = "リスナーのプロトコルが違います"
   }
 }
+
+run "ターゲットグループアタッチメントのテスト" {
+  command = apply
+
+  assert {
+    condition     = aws_lb_target_group_attachment.main.port == 80
+    error_message = "アタッチメントのポートが違います"
+  }
+
+  assert {
+    condition     = aws_lb_target_group_attachment.main.target_id == aws_instance.main.id
+    error_message = "EC2インスタンスが正しく紐付いていません"
+  }
+
+  # ↓ 追記
+  assert {
+    condition     = aws_lb_target_group_attachment.sub.port == 80
+    error_message = "サブEC2のアタッチメントのポートが違います"
+  }
+
+  assert {
+    condition     = aws_lb_target_group_attachment.sub.target_id == aws_instance.sub.id
+    error_message = "サブEC2インスタンスが正しく紐付いていません"
+  }
+}
