@@ -92,3 +92,8 @@ variable "log_retention_days" {
   type        = number
   default     = 30
 }
+
+variable "subnet_cidr_1c" {
+  description = "Public subnet CIDR for AZ 1c"
+  type        = string
+}

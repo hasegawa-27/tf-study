@@ -44,10 +44,15 @@ resource "aws_route_table_association" "public" {
 
 resource "aws_subnet" "public_1c" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.4.0/24"
+  cidr_block        = var.subnet_cidr_1c
   availability_zone = "${var.aws_region}c"
 
   tags = {
     Name = "${var.env}-public-subnet-1c"
   }
+}
+
+resource "aws_route_table_association" "public_1c" {
+  subnet_id      = aws_subnet.public_1c.id
+  route_table_id = aws_route_table.public.id
 }
