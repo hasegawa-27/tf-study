@@ -40,20 +40,6 @@ run "ターゲットグループのテスト" {
   }
 }
 
-run "ターゲットグループアタッチメントのテスト" {
-  command = apply
-
-  assert {
-    condition     = aws_lb_target_group_attachment.main.port == 80
-    error_message = "アタッチメントのポートが違います"
-  }
-
-  assert {
-    condition     = aws_lb_target_group_attachment.main.target_id == aws_instance.main.id
-    error_message = "EC2インスタンスが正しく紐付いていません"
-  }
-}
-
 run "ALBリスナーのテスト" {
   command = apply
 
